@@ -95,8 +95,6 @@ var EditHeaderModal = (_class = function (_Component) {
   (0, _createClass3.default)(EditHeaderModal, [{
     key: 'saveButtonPressed',
     value: function saveButtonPressed() {
-      var _this2 = this;
-
       var headerKeysCopy = this.state.headerKeys.slice(0, this.state.headerKeys.length - 1);
       var validHeaders = headerKeysCopy.map(function (headerKey) {
         return headerKey.length !== 0 && !headerKey.includes(' ');
@@ -109,14 +107,12 @@ var EditHeaderModal = (_class = function (_Component) {
         return p && c;
       }, true);
       if (allHeadersValid) {
-        (function () {
-          var headerValuesCopy = _this2.state.headerValues.slice(0, _this2.state.headerValues.length - 1);
-          var newHeaders = {};
-          headerKeysCopy.forEach(function (headerKey, index) {
-            return newHeaders[headerKey] = headerValuesCopy[index];
-          });
-          _this2.props.updateHeaders && _this2.props.updateHeaders(newHeaders);
-        })();
+        var headerValuesCopy = this.state.headerValues.slice(0, this.state.headerValues.length - 1);
+        var newHeaders = {};
+        headerKeysCopy.forEach(function (headerKey, index) {
+          return newHeaders[headerKey] = headerValuesCopy[index];
+        });
+        this.props.updateHeaders && this.props.updateHeaders(newHeaders);
       }
     }
   }, {
@@ -160,7 +156,7 @@ var EditHeaderModal = (_class = function (_Component) {
   }, {
     key: 'renderFormItems',
     value: function renderFormItems() {
-      var _this3 = this;
+      var _this2 = this;
 
       var headerKeys = this.state.headerKeys;
       var headerValues = this.state.headerValues;
@@ -173,10 +169,10 @@ var EditHeaderModal = (_class = function (_Component) {
           headerKey: headerKeys[index],
           headerValue: headerValues[index],
           isValid: validHeaders[index],
-          onInputFocus: _this3.onInputFocus,
-          deleteHeader: _this3.deleteHeader,
-          updateKey: _this3.updateKey,
-          updateValue: _this3.updateValue
+          onInputFocus: _this2.onInputFocus,
+          deleteHeader: _this2.deleteHeader,
+          updateKey: _this2.updateKey,
+          updateValue: _this2.updateValue
         });
       });
     }

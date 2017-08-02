@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -111,14 +107,12 @@ var GenerateMutation = function (_Component) {
       var isScalarOutputType = _this.isScalar(outputTypeConstructorName) || _this.isScalar(outputOfTypeConstructorName);
       var outputString = '';
       if (!isScalarOutputType) {
-        (function () {
-          var outputFields = outputType.getFields();
-          var outputStrings = Object.keys(outputFields).map(function (fieldKey) {
-            var outputField = outputFields[fieldKey];
-            return '' + _this.generateOutputObjectString(outputField);
-          });
-          outputString = '{ ' + outputStrings.join(',') + ' }';
-        })();
+        var outputFields = outputType.getFields();
+        var outputStrings = Object.keys(outputFields).map(function (fieldKey) {
+          var outputField = outputFields[fieldKey];
+          return '' + _this.generateOutputObjectString(outputField);
+        });
+        outputString = '{ ' + outputStrings.join(',') + ' }';
       }
 
       var queryString = '\n      mutation ' + mutationName + 'Mutation' + mutationInputString + ' {\n        ' + mutationName + inputString + ' ' + outputString + '\n      }\n    ';
@@ -238,23 +232,15 @@ var GenerateMutation = function (_Component) {
       }
 
       if (this.isObjectType(secondaryTypeConstructorName) || this.isObjectType(primaryTypeConstructorName)) {
-        var _ret2 = function () {
-          var fields = secondaryType ? secondaryType.getFields() : primaryType.getFields();
-          var fieldsInputObject = {};
-          Object.keys(fields).forEach(function (fieldKey) {
-            return fieldsInputObject[fieldKey] = _this2.generateInputObject(fields[fieldKey]);
-          });
-          if (_this2.isList(primaryTypeConstructorName)) {
-            return {
-              v: [fieldsInputObject]
-            };
-          }
-          return {
-            v: fieldsInputObject
-          };
-        }();
-
-        if ((typeof _ret2 === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret2)) === "object") return _ret2.v;
+        var fields = secondaryType ? secondaryType.getFields() : primaryType.getFields();
+        var fieldsInputObject = {};
+        Object.keys(fields).forEach(function (fieldKey) {
+          return fieldsInputObject[fieldKey] = _this2.generateInputObject(fields[fieldKey]);
+        });
+        if (this.isList(primaryTypeConstructorName)) {
+          return [fieldsInputObject];
+        }
+        return fieldsInputObject;
       }
 
       return '';
@@ -274,35 +260,25 @@ var GenerateMutation = function (_Component) {
       }
 
       if (this.isObjectType(ofTypeConstructorName) || this.isObjectType(typeConstructorName)) {
-        var _ret3 = function () {
-          var fields = ofType ? ofType.getFields() : type.getFields();
-          if (Object.keys(fields).includes('id')) {
-            return {
-              v: '{ id }'
-            };
-          }
+        var fields = ofType ? ofType.getFields() : type.getFields();
+        if (Object.keys(fields).includes('id')) {
+          return '{ id }';
+        }
 
-          var scalarKey = Object.keys(fields).find(function (fieldKey) {
-            var fieldType = fields[fieldKey].type;
-            var fieldTypeConstructorName = fieldType.constructor.name;
-            var fieldOfType = fieldType.ofType;
-            var fieldOfTypeConstructorName = fieldOfType ? fieldOfType.constructor.name : '';
-            return _this3.isScalar(fieldTypeConstructorName) || _this3.isScalar(fieldOfTypeConstructorName);
-          });
-          if (scalarKey) {
-            return {
-              v: '{ ' + scalarKey + ' }'
-            };
-          }
+        var scalarKey = Object.keys(fields).find(function (fieldKey) {
+          var fieldType = fields[fieldKey].type;
+          var fieldTypeConstructorName = fieldType.constructor.name;
+          var fieldOfType = fieldType.ofType;
+          var fieldOfTypeConstructorName = fieldOfType ? fieldOfType.constructor.name : '';
+          return _this3.isScalar(fieldTypeConstructorName) || _this3.isScalar(fieldOfTypeConstructorName);
+        });
+        if (scalarKey) {
+          return '{ ' + scalarKey + ' }';
+        }
 
-          var complexFieldKey = Object.keys(fields).sort()[0];
-          var complexField = fields[complexFieldKey];
-          return {
-            v: '{ ' + _this3.generateOutputObjectString(complexField) + ' }'
-          };
-        }();
-
-        if ((typeof _ret3 === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret3)) === "object") return _ret3.v;
+        var complexFieldKey = Object.keys(fields).sort()[0];
+        var complexField = fields[complexFieldKey];
+        return '{ ' + this.generateOutputObjectString(complexField) + ' }';
       }
 
       if (this.isUnionType(typeConstructorName) || this.isUnionType(ofTypeConstructorName)) {
