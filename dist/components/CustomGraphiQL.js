@@ -35,6 +35,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _graphql = require('graphql');
 
 var _isomorphicFetch = require('isomorphic-fetch');
@@ -216,7 +220,7 @@ var CustomGraphiQL = (_class = (_temp = _class2 = function (_Component) {
   }, {
     key: 'fetchGraphQLSchema',
     value: function () {
-      var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(url) {
+      var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(url) {
         var http, headers, graphQLParams, result, schema;
         return _regenerator2.default.wrap(function _callee$(_context) {
           while (1) {
@@ -290,7 +294,7 @@ var CustomGraphiQL = (_class = (_temp = _class2 = function (_Component) {
   }, {
     key: 'graphQLFetcher',
     value: function () {
-      var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(graphQLParams) {
+      var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(graphQLParams) {
         var http, headers, graphQLEndpoint, result, _result;
 
         return _regenerator2.default.wrap(function _callee2$(_context2) {
@@ -501,21 +505,21 @@ var CustomGraphiQL = (_class = (_temp = _class2 = function (_Component) {
   }]);
   return CustomGraphiQL;
 }(_react.Component), _class2.propTypes = {
-  fetcher: _react.PropTypes.func,
-  schema: _react.PropTypes.instanceOf(_graphql.GraphQLSchema),
-  query: _react.PropTypes.string,
-  variables: _react.PropTypes.string,
-  operationName: _react.PropTypes.string,
-  response: _react.PropTypes.string,
-  storage: _react.PropTypes.shape({
-    getItem: _react.PropTypes.func,
-    setItem: _react.PropTypes.func
+  fetcher: _propTypes2.default.func,
+  schema: _propTypes2.default.instanceOf(_graphql.GraphQLSchema),
+  query: _propTypes2.default.string,
+  variables: _propTypes2.default.string,
+  operationName: _propTypes2.default.string,
+  response: _propTypes2.default.string,
+  storage: _propTypes2.default.shape({
+    getItem: _propTypes2.default.func,
+    setItem: _propTypes2.default.func
   }),
-  defaultQuery: _react.PropTypes.string,
-  onEditQuery: _react.PropTypes.func,
-  onEditVariables: _react.PropTypes.func,
-  onEditOperationName: _react.PropTypes.func,
-  onToggleDocs: _react.PropTypes.func,
-  getDefaultFieldNames: _react.PropTypes.func
+  defaultQuery: _propTypes2.default.string,
+  onEditQuery: _propTypes2.default.func,
+  onEditVariables: _propTypes2.default.func,
+  onEditOperationName: _propTypes2.default.func,
+  onToggleDocs: _propTypes2.default.func,
+  getDefaultFieldNames: _propTypes2.default.func
 }, _temp), (_applyDecoratedDescriptor(_class.prototype, 'storageGet', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'storageGet'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'storageSet', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'storageSet'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'getCurrentResponse', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'getCurrentResponse'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'setSavedQueries', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'setSavedQueries'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'getSavedQueries', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'getSavedQueries'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'setQueryFromString', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'setQueryFromString'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'updateQueryVariablesResponse', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'updateQueryVariablesResponse'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'fetchGraphQLSchema', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'fetchGraphQLSchema'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'graphQLFetcher', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'graphQLFetcher'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'updateHeaders', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'updateHeaders'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'hideEditHeaderModal', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'hideEditHeaderModal'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'showEditHeaderModal', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'showEditHeaderModal'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'onEditQuery', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'onEditQuery'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'onEditVariables', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'onEditVariables'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'onFetchButtonPressed', [_coreDecorators.autobind], Object.getOwnPropertyDescriptor(_class.prototype, 'onFetchButtonPressed'), _class.prototype)), _class);
 exports.default = CustomGraphiQL;
