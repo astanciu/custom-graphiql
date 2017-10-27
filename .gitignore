@@ -7,7 +7,3 @@ npm-debug.log
 
 node_modules/
 coverage/
-dist/
-/custom-graphiql.js
-/custom-graphiql.min.js
-/custom-graphiql.css
